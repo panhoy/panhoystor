@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Card UI</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #222;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .card h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card button, .card a {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            background-color: #444;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover, .card a:hover {
+            background-color: #1abc9c;
+        }
+
+        .card .support {
+            background-color: #ff69b4;
+            font-weight: bold;
+        }
+
+        .card .support:hover {
+            background-color: #ff85c1;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .socials a {
+            margin: 0 10px;
+            font-size: 24px;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: #1abc9c;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1> Downloads Esign</h1>
+
+        <button onclick="window.location.href='#downloads'">Downloads</button>
+
+        <div class="socials">
+            <a href="#github">&#xf09b;</a>
+            <a href="#twitter">&#xf099;</a>
+            <a href="#discord">&#xf392;</a>
+        </div>
+    </div>
+</body>
+</html>
