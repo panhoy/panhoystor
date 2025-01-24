@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #000000;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(90deg, #00ff15, #d10092);
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(151, 149, 149, 0.534);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .download-btn:hover {
+    background: linear-gradient(90deg, #00d10a, #007bff);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .download-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .download-btn svg {
+    width: 20px;
+    height: 20px;
+  }
