@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker Unlock Panel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: black;
+      color: #0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-shadow: 0 0 5px #0f0;
+    }
+
+    .unlock-container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0f0;
+      width: 400px;
+      border: 2px solid #0f0;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: black;
+      color: #0f0;
+      border: 2px solid #0f0;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      margin: 12px 0;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .btn:hover {
+      background: #0f0;
+      color: black;
+      box-shadow: 0 0 15px #0f0;
+    }
+
+    .progress-bar {
+      margin: 15px 0;
+      background-color: #222;
+      width: 100%;
+      height: 12px;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 15px #0f0;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: #0f0;
+      transition: width 0.5s;
+    }
+
+    .unlock-btn {
+      background: black;
+      color: #0f0;
+      border: 2px solid #0f0;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      transition: opacity 0.3s, box-shadow 0.3s;
+    }
+
+    .unlock-btn.enabled {
+      cursor: pointer;
+      opacity: 1;
+      box-shadow: 0 0 15px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <div class="unlock-container">
+    <h2>Access the Dark Web Tool</h2>
+    <p>Complete both steps to unlock</p>
+    <a href="#" class="btn" id="telegramButton">Join Telegram</a>
+    <a href="#" class="btn" id="youtubeButton">Subscribe on YouTube</a>
+
+    <div class="progress-bar">
+      <div id="progress" class="progress"></div>
+    </div>
+    <button id="unlockButton" class="unlock-btn" disabled>Unlock Now</button>
+  </div>
+
+  <script>
+    const youtubeButton = document.getElementById('youtubeButton');
+    const telegramButton = document.getElementById('telegramButton');
+    const unlockButton = document.getElementById('unlockButton');
+    const progressBar = document.getElementById('progress');
+
+    let isYouTubeClicked = false;
+    let isTelegramClicked = false;
+
+    youtubeButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      isYouTubeClicked = true;
+      window.open('https://youtube.com/@xai-qq', '_blank');
+      checkProgress();
+    });
+
+    telegramButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      isTelegramClicked = true;
+      window.open('https://t.me/onlinera_store', '_blank');
+      checkProgress();
+    });
+
+    function checkProgress() {
+      if (isYouTubeClicked && isTelegramClicked) {
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 5;
+          progressBar.style.width = progress + '%';
+          if (progress >= 100) {
+            clearInterval(interval);
+            unlockButton.disabled = false;
+            unlockButton.classList.add('enabled');
+            unlockButton.textContent = 'Download Now';
+          }
+        }, 100);
+      }
+    }
+
+    unlockButton.addEventListener('click', function () {
+      if (!this.disabled) {
+        alert('Dark Web Tool Unlocked!');
+        window.location.href = 'https://t.me/nhoy200';
+      }
+    });
+  </script>
+</body>
+</html>

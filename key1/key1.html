@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unlock Link</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url(https://i.pinimg.com/736x/50/ed/05/50ed050fd3a26bd86a4ccc0e39b22b0f.jpg);
+      color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-size: cover;
+
+    }
+
+    .unlock-container {
+      text-align: center;
+      background-image: url();
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .subscribe-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .subscribe-btn img {
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .subscribe-btn:hover {
+      background-color: #cc0000;
+    }
+
+    .progress-bar {
+      margin: 15px 0;
+      background-color: #4b4747;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background-color: #4caf50;
+      transition: width 0.5s;
+    }
+
+    .unlock-btn {
+      background-color: #555;
+      color: #aaa;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: not-allowed;
+    }
+
+    .unlock-btn.enabled {
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="unlock-container">
+    <h2>Unlock Link</h2>
+    <p>Complete the actions and unlock the link</p>
+    <a href="https://youtube.com/@xai-qq?si=fhMk_zGHAerZtpSQ" target="_blank" id="subscribeButton" class="subscribe-btn">
+      <img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube"> Subscribe On YouTube
+    </a>
+    <div class="progress-bar">
+      <div id="progress" class="progress"></div>
+    </div>
+    <button id="unlockButton" class="unlock-btn" disabled>Unlock Link</button>
+  </div>
+
+  <script>
+        const subscribeButton = document.getElementById('subscribeButton');
+        const unlockButton = document.getElementById('unlockButton');
+        const progressBar = document.getElementById('progress');
+      
+        // Event listener for the "Subscribe On YouTube" button
+        subscribeButton.addEventListener('click', function (event) {
+          // Prevent default action to avoid instant redirect when simulating
+          event.preventDefault();
+      
+          // Simulate a delay to represent subscribing action
+          let progress = 0;
+          const interval = setInterval(() => {
+            progress += 2;
+            progressBar.style.width = progress + '%'; // Corrected line
+      
+            if (progress >= 100) {
+              clearInterval(interval);
+      
+              // Enable the unlock button once progress is complete
+              unlockButton.disabled = false;
+              unlockButton.classList.add('enabled');
+              unlockButton.textContent = 'telegrame: nhoy_11';
+            }
+          }, 100); // Update progress every 100ms
+      
+          // Open the YouTube channel in a new tab
+          window.open('https://youtube.com/@xai-qq?si=fhMk_zGHAerZtpSQ');
+        });
+      
+        // Event listener for the "Unlock Link" button
+        unlockButton.addEventListener('click', function () {
+          if (!this.disabled) {
+            // Action when link is unlocked
+
+            window.location.href = 'https://nhoy_11.t.me/'; // Replace with your desired URL
+          }
+        });
+      
+  </script>
+</body>
+</html>

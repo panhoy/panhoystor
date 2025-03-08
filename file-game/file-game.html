@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Photo Grid</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="A responsive photo grid showcasing beautiful images with captions.">
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+ /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background-color: #111;
+  color: #00FF00;
+  line-height: 1.6;
+  text-align: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #000;
+  border-bottom: 1px solid #00FF00;
+}
+
+header .logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.menu li {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #00FF00;
+  font-size: 18px;
+}
+
+.menu li:hover {
+  color: #ff0000;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+/* Photo Grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.photo-item {
+  text-align: center;
+  border: 2px solid #00FF00;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.photo-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.photo-item h3 {
+  color: #00FF00;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.photo-item button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #00FF00;
+  color: black;
+  border: 2px solid #00FF00;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.photo-item button:hover {
+  background-color: #ff0000;
+  color: white;
+  border-color: #ff0000;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #000;
+  color: #00FF00;
+  border-top: 1px solid #00FF00;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+  display: inline-block;
+  color: #00FF00;
+  font-size: 2rem;
+}
+
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+  text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red;
+  clip-path: inset(0 0 0 0);
+  animation: glitch-anim 0.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(10% 0 5% 0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  </style>
+</head>
+<body> 
+  <header>
+    <div class="logo">
+      <a href="/index.html">
+        <img src="/photo/logo11.jpg" alt="Logo">
+      </a>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="/index.html"><i class="fa-solid fa-bars"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="photo-grid" id="photoGrid"></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BUY MHOY.STORE</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const photoData = [
+        { img: "/photo/app-ipa.jpg", title: "APP IPA", link: "/key/key.html" },
+        { img: "/photo/ipa.jpg", title: "Sing-IPA", link: "/key/youtube.html" },
+        { img: "/photo/free.png", title: "FREE FIRE-HACK", link: "/file-game/free-fire/free-fire.html" },
+        { img: "https://i.pinimg.com/736x/76/74/44/76744487f26d0848b00b56856a1539ba.jpg", title: "APP", link: "/file-app/key/app.html" },
+        { img: "https://i.pinimg.com/736x/30/92/c0/3092c0d2be2c5c43e0e7e3c567c849fe.jpg", title: "GAME-HACK", link: "#" },
+        { img: "https://i.pinimg.com/736x/82/55/03/8255033248d018b6c5f3d460b2deec16.jpg", title: "MOBILE-HACK", link: "#" }
+      ];
+
+      const grid = document.getElementById("photoGrid");
+
+      photoData.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("photo-item");
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.title}">
+          <h3>${item.title}</h3>
+          <a href="${item.link}"><button>${item.link === "#" ? "SOON" : "DOWNLOAD"}</button></a>
+        `;
+        grid.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

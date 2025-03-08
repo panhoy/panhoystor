@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker Unlock</title>
+  <style>
+    /* Reset Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Hacker Theme */
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #000;
+      color: #00FF00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+    }
+
+    /* Unlock Container */
+    .unlock-container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+      width: 350px;
+      border: 2px solid #00FF00;
+    }
+
+    /* Glitch Effect Title */
+    .glitch {
+      position: relative;
+      display: inline-block;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .glitch::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: red;
+      text-shadow: 0 0 5px red, 0 0 10px red;
+      clip-path: inset(0 0 0 0);
+      animation: glitch-anim 0.3s infinite alternate-reverse;
+    }
+
+    @keyframes glitch-anim {
+      0% { clip-path: inset(10% 0 5% 0); }
+      100% { clip-path: inset(0 0 10% 0); }
+    }
+
+    /* Buttons */
+    .subscribe-btn, .telegram-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #00FF00;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px 0;
+      padding: 10px 20px;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .telegram-btn {
+      background-color: #0084ff;
+    }
+
+    .subscribe-btn img, .telegram-btn img {
+      height: 20px;
+      margin-right: 10px;
+    }
+
+    .subscribe-btn:hover, .telegram-btn:hover {
+      transform: scale(1.1);
+      background-color: red;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      margin: 15px 0;
+      background-color: #222;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background-color: #00FF00;
+      transition: width 0.5s ease-in-out;
+    }
+
+    /* Unlock Button */
+    .unlock-btn {
+      padding: 10px 20px;
+      background-color: #444;
+      color: #888;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: not-allowed;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .unlock-btn.enabled {
+      background-color: #00FF00;
+      color: #000;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="unlock-container">
+    <h2 class="glitch" data-text="Unlock Link">Unlock Link</h2>
+    <p>Complete both actions to unlock the link</p>
+    
+    <a href="#" class="telegram-btn" id="telegramButton">
+      <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram">
+      Join On Telegram
+    </a>
+    
+    <a href="#" class="subscribe-btn" id="youtubeButton">
+      <img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube">
+      Subscribe On YouTube
+    </a>
+
+    <div class="progress-bar">
+      <div id="progress" class="progress"></div>
+    </div>
+    
+    <button id="unlockButton" class="unlock-btn" disabled>Unlock Link</button>
+  </div>
+
+  <script>
+    const youtubeButton = document.getElementById('youtubeButton');
+    const telegramButton = document.getElementById('telegramButton');
+    const unlockButton = document.getElementById('unlockButton');
+    const progressBar = document.getElementById('progress');
+
+    let isYouTubeClicked = false;
+    let isTelegramClicked = false;
+
+    // YouTube Button Click Event
+    youtubeButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      isYouTubeClicked = true;
+      window.open('https://youtube.com/@xai-qq?si=fhMk_zGHAerZtpSQ', '_blank');
+      checkProgress();
+    });
+
+    // Telegram Button Click Event
+    telegramButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      isTelegramClicked = true;
+      window.open('https://t.me/nhoy200', '_blank');
+      checkProgress();
+    });
+
+    // Progress Check
+    function checkProgress() {
+      if (isYouTubeClicked && isTelegramClicked) {
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += 2;
+          progressBar.style.width = progress + '%';
+
+          if (progress >= 100) {
+            clearInterval(interval);
+            unlockButton.disabled = false;
+            unlockButton.classList.add('enabled');
+            unlockButton.textContent = 'sing IPA 😉';
+          }
+        }, 100);
+      }
+    }
+
+    // Unlock Button Click Event
+    unlockButton.addEventListener('click', function () {
+      if (!this.disabled) {
+        alert('Sing IPA download');
+        window.location.href = 'https://sign.ipasign.cc';
+      }
+    });
+
+  </script>
+</body>
+</html>

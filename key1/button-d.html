@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBox Premium Offer</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0f7fa, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 360px;
+            padding: 24px;
+        }
+
+        .card img {
+            width: 60px;
+            margin-bottom: 20px;
+        }
+
+        .card h1 {
+            font-size: 22px;
+            margin: 0;
+            color: #333;
+        }
+
+        .card h2 {
+            font-size: 28px;
+            color: #00796b;
+            margin: 16px 0;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .card ul li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .card ul li::before {
+            content: "\2713";
+            color: #00796b;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .card button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .card button:hover {
+            background-color: #004d40;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <img src="" alt="GBox Logo">
+    <h1>Premium Package</h1>
+    <h2>$2 / 1 months</h2>
+    <ul>
+        <li>Registered 1 Device</li>
+        <li>Revoke Protection</li>
+        <li>Sign From An External Link</li>
+        <li>Tweaked Apps</li>
+        <li>Hacked Games</li>
+        <li>Free Paid Apps & Games</li>
+        <li>Get UDID</li>
+    </ul>
+    <button id="premiumButton">Get Premium</button>
+    <footer>Secure and trusted by thousands of users worldwide.</footer>
+</div>
+
+<script>
+    document.getElementById("premiumButton").addEventListener("click", function() {
+        alert("Congratulations! You have successfully upgraded to the GBox Premium package.");
+        window.location.href = "/buy/buy.html";
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Photo Grid</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="A responsive photo grid showcasing beautiful images with captions.">
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #e3e0e6;
+    }
+    
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #000;
+      border-bottom: 1px solid #ccc;
+    }
+    
+    .logo img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+    
+    .menu ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+    
+    .menu li {
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+    
+    .menu li a {
+      text-decoration: none;
+      color: white;
+    }
+    
+    .menu li:hover {
+      color: #007BFF;
+    }
+    
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    
+    .photo-item {
+      text-align: center;
+      border: 1px solid #000;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .photo-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .photo-item img {
+      width: 50%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    
+    .photo-item button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: 2px solid #000;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .photo-item button:hover {
+      background-color: #000000;
+      color: rgb(255, 255, 255);
+      border-color: #ffffff;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #f4f4f4;
+      border-top: 1px solid #ccc;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="/index.html">
+        <img src="/photo/logo-removebg-preview.png" alt="Logo">
+      </a>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="/index.html"><i class="fa-solid fa-bars"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="photo-grid" id="photoGrid"></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BUY MHOY.STORE</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const photoData = [
+        { img: "https://i.pinimg.com/736x/fc/5f/2b/fc5f2b82b3a0870e94aa9280cc80fe9f.jpg", title: "YouTube ", link: "/IPA/app-ipa/YouTube.ipa" },
+        { img: "https://i.pinimg.com/736x/d1/00/9f/d1009f9fbe8bc537c38fc059017e667d.jpg", title: "PicsArt", link: "/IPA/app-ipa/picsart.ipa" },
+        { img: "https://i.pinimg.com/736x/e3/cc/01/e3cc01eb99c39c56f88ec1f48839fb6a.jpg", title: "Alight Motion", link: "/IPA/app-ipa/Alight_Motion.ipa" },
+        { img: "https://i.pinimg.com/736x/5d/63/c8/5d63c857404bab94c94a3f5b719628f2.jpg", title: "Tik Tok", link: "/IPA/app-ipa/Tik_Tok.ipa" },
+        { img: "https://i.pinimg.com/736x/51/c8/43/51c8435b387e533ca86b2c99011eaf23.jpg", title: "NetFlix", link: "#" },
+        { img: "https://i.pinimg.com/736x/57/4c/28/574c281297dbbc549a41739c1b36aa75.jpg", title: "CapCut", link: "#" },
+        { img: "/photo/necigram.jpg", title: "Niecgram", link: "/IPA/app-ipa/Nicegram.ipa" },
+      ];
+
+      const grid = document.getElementById("photoGrid");
+
+      photoData.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("photo-item");
+        div.innerHTML = `
+          <img src="${item.img}" alt="${item.title}">
+          <h3>${item.title}</h3>
+          <a href="${item.link}"><button>${item.link === "#" ? "SOON" : "DOWNLOAD"}</button></a>
+        `;
+        grid.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

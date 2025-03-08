@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacker Style Photo Grid</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: black;
+      color: #00ff00;
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #002200;
+      border-bottom: 1px solid #00ff00;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .menu li {
+      cursor: pointer;
+      padding: 5px 10px;
+    }
+    .menu ul{
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #00ff00;
+      font-size: 16px;
+      padding: 5px 10px;
+      transition: color 0.3s;
+      text-shadow: 0 0 5px #00ff00;
+      
+    }
+
+
+    .menu a:hover {
+      color: #0f0;
+    }
+
+    /* Photo Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .photo-item {
+      text-align: center;
+      border: 1px solid #00ff00;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #001100;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .photo-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    .photo-item img {
+      width: 80%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-top: 10px;
+      border: 2px solid #00ff00;
+    }
+
+    .photo-item h3 {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #0f0;
+    }
+
+    .photo-item button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #003300;
+      color: #0f0;
+      border: 1px solid #00ff00;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .photo-item button:hover {
+      background-color: #005500;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #002200;
+      border-top: 1px solid #00ff00;
+      font-size: 14px;
+    }
+
+    footer nav a {
+      margin: 0 10px;
+      color: #00ff00;
+      text-decoration: none;
+    }
+
+    footer nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/photo/logo-removebg-preview.png" alt="Logo">
+      <span></span>
+    </div>
+    <nav class="menu">
+      <ul>
+        <li><a href="/contact.html"><i class="fa-solid fa-bars"></i></a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="photo-grid">
+      <div class="photo-item">
+        <img src="/photo/free.png" alt="APP IPA">
+        <h3>MODE IOS 15 UP</h3>
+        <a href="/file-app/key/app.html">
+          <button> DOWNLOAD </button>
+        </a>
+      </div>
+      <div class="photo-item">
+        <img src="/photo/free.png" alt="Sing IPA">
+        <h3>MODE IOS 18</h3>
+        <a href="/key/youtube.htmlX">
+          <button>SOON</button>
+        </a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 BUY NHOY STORE</p>
+    <nav>
+      <a href="/privacy.html">Privacy</a> |
+      <a href="/terms.html">Terms</a> |
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </footer>
+</body>
+</html>

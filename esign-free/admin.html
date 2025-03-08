@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="hacker-font.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: black;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+            overflow: hidden;
+        }
+
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ff00;
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-size: 20px;
+           
+            color: #00ff00;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #00ff00;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            font-size: 16px;
+            background: black;
+            color: #00ff00;
+        }
+
+        input:focus {
+            border-color: #00ff00;
+            outline: none;
+            box-shadow: 0 0 8px #00ff00;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: black;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #00ff00;
+            color: black;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix"></canvas>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit">Login</button>
+            <div id="error-message"></div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            const validUsers = {
+                'Admin': 'nha123',
+                'User1': 'pass1',
+                'User2': 'pass2',
+                'User3': 'pass3',
+                'User4': 'pass4'
+            };
+
+            if (validUsers[username] && validUsers[username] === password) {
+                window.location.href = '/esign-free/esign-free.html'; // Redirect to the dashboard
+            } else {
+                document.getElementById('error-message').innerText = 'Invalid username or password!';
+            }
+        });
+
+        // Matrix effect
+        const canvas = document.querySelector('.matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(0);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff00';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+    </script>
+</body>
+</html>

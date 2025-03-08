@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Gallery</title>
+  <meta name="description" content="A responsive photo gallery with modern design.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    /* Base styles and reset */
+    :root {
+      --primary: #4961DC;
+      --secondary: #6979F8;
+      --accent: #FFA26B;
+      --text: #333333;
+      --light-text: #767676;
+      --background: #FFFFFF;
+      --light-bg: #F5F7FA;
+      --border: #E2E8F0;
+      --shadow: rgba(0, 0, 0, 0.05);
+      --card-shadow: rgba(0, 0, 0, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background-color: var(--light-bg);
+      line-height: 1.6;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Header */
+    header {
+      background-color: var(--background);
+      box-shadow: 0 2px 10px var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--primary);
+    }
+    
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+    
+    /* Hero Section */
+    .hero {
+      padding: 60px 0;
+      text-align: center;
+      background-color: var(--background);
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: var(--light-text);
+    }
+    
+    /* Search and Filters */
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    
+    .search-box {
+      display: flex;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px var(--shadow);
+      background-color: var(--background);
+      border: 1px solid var(--border);
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+    
+    .search-btn {
+      padding: 0 25px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .search-btn:hover {
+      background-color: var(--secondary);
+    }
+    
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 8px 16px;
+      background-color: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    /* Gallery Grid */
+    .gallery-container {
+      background-color: var(--background);
+      padding: 40px 0;
+      margin-bottom: 40px;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    
+    .gallery-item {
+      background-color: var(--background);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px var(--card-shadow);
+    }
+    
+    .item-image {
+      height: 180px;
+      position: relative;
+    }
+    
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .item-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    
+    .item-content {
+      padding: 20px;
+    }
+    
+    .item-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .item-description {
+      color: var(--light-text);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+    
+    .item-tags {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .item-stats {
+      display: flex;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--light-text);
+    }
+    
+    .download-btn {
+      padding: 6px 12px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background-color 0.3s;
+    }
+    
+    .download-btn:hover {
+      background-color: var(--secondary);
+    }
+    
+    .soon-btn {
+      padding: 6px 12px;
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 60px 0;
+      background-color: var(--light-bg);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      background-color: var(--background);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px var(--shadow);
+      text-align: center;
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background-color: var(--light-bg);
+      color: var(--primary);
+      font-size: 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .feature-description {
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--background);
+      padding: 60px 0 30px;
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: var(--light-text);
+      transition: color 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      background-color: var(--light-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+    
+    .social-icon:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+    
+    /* Loading skeleton */
+    .skeleton {
+      background: linear-gradient(
+        90deg,
+        var(--light-bg) 25%,
+        rgba(245, 247, 250, 0.6) 50%,
+        var(--light-bg) 75%
+      );
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    
+    @keyframes loading {
+      0% {
+        background-position: -100% 0;
+      }
+      100% {
+        background-position: 100% 0;
+      }
+    }
+    
+    .skeleton-item {
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .skeleton-image {
+      height: 180px;
+    }
+    
+    .skeleton-content {
+      padding: 20px;
+    }
+    
+    .skeleton-title {
+      height: 20px;
+      width: 80%;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    .skeleton-text {
+      height: 12px;
+      width: 100%;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .skeleton-tags {
+      display: flex;
+      gap: 5px;
+      margin: 15px 0;
+    }
+    
+    .skeleton-tag {
+      height: 20px;
+      width: 40px;
+      border-radius: 4px;
+    }
+    
+    .skeleton-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .skeleton-stats {
+      height: 15px;
+      width: 100px;
+      border-radius: 4px;
+    }
+    
+    .skeleton-button {
+      height: 30px;
+      width: 80px;
+      border-radius: 6px;
+    }
+    
+    /* Back to top */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 45px;
+      height: 45px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(73, 97, 220, 0.3);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 99;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--background);
+        box-shadow: 0 5px 10px var(--shadow);
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .feature-card {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .search-box {
+        flex-direction: column;
+        border-radius: 12px;
+      }
+      
+      .search-input {
+        width: 100%;
+        border-radius: 12px 12px 0 0;
+      }
+      
+      .search-btn {
+        width: 100%;
+        padding: 10px 0;
+        border-radius: 0 0 12px 12px;
+      }
+      
+      .filters {
+        gap: 8px;
+      }
+      
+      .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+      }
+    }
+    /* Updated Color Scheme */
+:root {
+  /* Primary Colors */
+  --primary: #6C5CE7;         /* Rich purple */
+  --secondary: #8A7EF0;       /* Lighter purple */
+  --accent: #FF7675;          /* Coral */
+  
+  /* Additional Colors */
+  --accent-secondary: #FDCB6E; /* Warm yellow */
+  --success: #00B894;         /* Emerald green */
+  --warning: #FDCB6E;         /* Amber */
+  --danger: #D63031;          /* Red */
+  
+  /* UI Colors */
+  --text: #2D3436;            /* Dark gray for main text */
+  --light-text: #636E72;      /* Medium gray for secondary text */
+  --background: #FFFFFF;      /* White background */
+  --light-bg: #F7F9FC;        /* Very light blue-gray */
+  --dark-bg: #DFE6E9;         /* Lighter gray for contrast areas */
+  --border: #E2E8F0;          /* Light gray borders */
+  --shadow: rgba(0, 0, 0, 0.05);
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  
+  /* Gradients */
+  --primary-gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  --accent-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+}
+
+/* Apply gradient to buttons */
+.search-btn, .download-btn {
+  background: var(--primary-gradient);
+  transition: all 0.3s;
+}
+
+.search-btn:hover, .download-btn:hover {
+  background: var(--accent-gradient);
+  transform: translateY(-2px);
+}
+
+/* Update filter buttons */
+.filter-btn {
+  border: 1px solid var(--border);
+  color: var(--light-text);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: transparent;
+}
+
+/* Apply accent color to badges */
+.item-badge {
+  background: var(--accent-gradient);
+}
+
+/* Update feature cards */
+.feature-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+.feature-icon {
+  background: var(--light-bg);
+  color: var(--primary);
+}
+
+/* Update social icons */
+.social-icon:hover {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+/* Back to top button */
+.back-to-top {
+  background: var(--primary-gradient);
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+/* Category tag colors */
+.tag[class*="apps"] {
+  background-color: rgba(108, 92, 231, 0.1);
+  color: var(--primary);
+}
+
+.tag[class*="games"] {
+  background-color: rgba(255, 118, 117, 0.1);
+  color: var(--accent);
+}
+
+.tag[class*="tools"] {
+  background-color: rgba(0, 184, 148, 0.1);
+  color: var(--success);
+}
+
+.tag[class*="productivity"] {
+  background-color: rgba(253, 203, 110, 0.1);
+  color: var(--warning);
+}
+
+.tag[class*="security"] {
+  background-color: rgba(214, 48, 49, 0.1);
+  color: var(--danger);
+}
+
+/* Add a subtle pattern to the hero section */
+.hero {
+  background-color: var(--background);
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236c5ce7' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+}
+/* New Color Scheme - Spring 2025 Edition */
+:root {
+  /* Primary Colors */
+  --primary: #4E54C8;         /* Deep blue-purple */
+  --secondary: #8F94FB;       /* Lighter lavender blue */
+  --accent: #FF7D54;          /* Warm coral orange */
+  
+  /* Additional Colors */
+  --accent-secondary: #FFC15E; /* Golden yellow */
+  --success: #2EDAD1;         /* Turquoise */
+  --warning: #FFD460;         /* Marigold yellow */
+  --danger: #FC5C65;          /* Bright watermelon red */
+  
+  /* UI Colors */
+  --text: #192A56;            /* Deep navy blue */
+  --light-text: #4B6584;      /* Steel blue-gray */
+  --background: #FFFFFF;      /* White background */
+  --light-bg: #F1F4FD;        /* Very light periwinkle */
+  --dark-bg: #E4E8F7;         /* Light lavender for contrast */
+  --border: #D9E1F2;          /* Soft blue borders */
+  --shadow: rgba(78, 84, 200, 0.08);
+  --card-shadow: rgba(78, 84, 200, 0.15);
+  
+  /* Gradients */
+  --primary-gradient: linear-gradient(135deg, #4E54C8 0%, #8F94FB 100%);
+  --accent-gradient: linear-gradient(135deg, #FF7D54 0%, #FFC15E 100%);
+  --success-gradient: linear-gradient(135deg, #2EDAD1 0%, #96EFEA 100%);
+}
+
+/* Button styling with refined gradients */
+.search-btn, .download-btn {
+  background: var(--primary-gradient);
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(78, 84, 200, 0.2);
+}
+
+.search-btn:hover, .download-btn:hover {
+  background: var(--accent-gradient);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 125, 84, 0.3);
+}
+
+/* Updated filter buttons */
+.filter-btn {
+  border: 1px solid var(--border);
+  color: var(--light-text);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(78, 84, 200, 0.2);
+}
+
+/* Enhanced badges */
+.item-badge {
+  background: var(--accent-gradient);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(255, 125, 84, 0.25);
+}
+
+/* Refined gallery items */
+.gallery-item {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-bottom: 3px solid transparent;
+}
+
+.gallery-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px var(--card-shadow);
+  border-bottom: 3px solid var(--primary);
+}
+
+.item-image {
+  overflow: hidden;
+}
+
+.item-image img {
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover .item-image img {
+  transform: scale(1.05);
+}
+
+/* Enhanced feature cards */
+.feature-card {
+  border-radius: 16px;
+  transition: all 0.4s ease;
+  border-top: 4px solid transparent;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px var(--card-shadow);
+  border-top: 4px solid var(--primary);
+}
+
+.feature-icon {
+  background: var(--light-bg);
+  color: var(--primary);
+  transition: all 0.3s ease;
+  width: 70px;
+  height: 70px;
+  box-shadow: 0 5px 15px rgba(78, 84, 200, 0.15);
+}
+
+.feature-card:hover .feature-icon {
+  background: var(--primary-gradient);
+  color: white;
+  transform: rotate(10deg) scale(1.1);
+}
+
+/* Improved tags */
+.tag {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+}
+
+.tag[class*="apps"] {
+  background-color: rgba(78, 84, 200, 0.12);
+  color: var(--primary);
+}
+
+.tag[class*="games"] {
+  background-color: rgba(255, 125, 84, 0.12);
+  color: var(--accent);
+}
+
+.tag[class*="tools"] {
+  background-color: rgba(46, 218, 209, 0.12);
+  color: var(--success);
+}
+
+.tag[class*="productivity"] {
+  background-color: rgba(255, 212, 96, 0.12);
+  color: var(--warning);
+}
+
+.tag[class*="security"] {
+  background-color: rgba(252, 92, 101, 0.12);
+  color: var(--danger);
+}
+
+/* Elegant back to top button */
+.back-to-top {
+  background: var(--primary-gradient);
+  box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+  transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(78, 84, 200, 0.4);
+}
+
+.back-to-top.visible {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced hero section */
+.hero {
+  background-color: var(--background);
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(78, 84, 200, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 125, 84, 0.05) 0%, transparent 50%);
+  padding: 80px 0;
+}
+
+.hero h1 {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  font-weight: 800;
+}
+
+/* Nav menu enhancements */
+.nav-link {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.nav-link::after {
+  height: 3px;
+  border-radius: 3px;
+  background: var(--primary-gradient);
+}
+
+/* Social icon improvements */
+.social-icon {
+  transition: all 0.3s ease;
+  color: var(--primary);
+}
+
+.social-icon:hover {
+  background: var(--primary-gradient);
+  color: white;
+  transform: translateY(-5px) rotate(5deg);
+  box-shadow: 0 5px 10px rgba(78, 84, 200, 0.2);
+}
+
+/* Animation for gallery items */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gallery-item {
+  animation: fadeInUp 0.5s ease backwards;
+}
+
+/* Staggered animations */
+.gallery-item:nth-child(1) { animation-delay: 0.1s; }
+.gallery-item:nth-child(2) { animation-delay: 0.2s; }
+.gallery-item:nth-child(3) { animation-delay: 0.3s; }
+.gallery-item:nth-child(4) { animation-delay: 0.4s; }
+.gallery-item:nth-child(5) { animation-delay: 0.5s; }
+.gallery-item:nth-child(6) { animation-delay: 0.6s; }
+.gallery-item:nth-child(7) { animation-delay: 0.7s; }
+.gallery-item:nth-child(8) { animation-delay: 0.8s; }
+
+/* Enhanced footer */
+footer {
+  background: linear-gradient(180deg, white 0%, var(--light-bg) 100%);
+}
+
+/* Search box enhancement */
+.search-box {
+  box-shadow: 0 8px 20px rgba(78, 84, 200, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+  box-shadow: 0 10px 25px rgba(78, 84, 200, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Dark mode support */
+.dark-mode {
+  --primary: #6C63FF;
+  --secondary: #8F94FB;
+  --text: #EFEFEF;
+  --light-text: #B8C4E0;
+  --background: #121212;
+  --light-bg: #1E1E30;
+  --dark-bg: #252542;
+  --border: #3D3D65;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --card-shadow: rgba(0, 0, 0, 0.3);
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <img src="/trollstore/photo/photo_2025-02-21_01-44-10.jpg" alt="Gallery Logo">
+        <span>NHOY STORE</span>
+      </a>
+      
+      <nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="nav-menu" id="navMenu">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#" class="nav-link">Browse</a>
+          <a href="#" class="nav-link">Collections</a>
+          <a href="#" class="nav-link">About</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="container">
+      <h1>Discover Premium Digital Content</h1>
+      <p>Explore our curated collection of apps, games, and tools designed to enhance your digital experience.</p>
+      
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" class="search-input" placeholder="Search apps, games, tools..." id="searchInput">
+          <button class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="filters">
+        <button class="filter-btn active" data-category="all">All Items</button>
+        <button class="filter-btn" data-category="apps">Apps</button>
+        <button class="filter-btn" data-category="games">Games</button>
+        <button class="filter-btn" data-category="tools">Tools</button>
+        <button class="filter-btn" data-category="productivity">Productivity</button>
+      </div>
+    </div>
+  </section>
+  
+  <section class="gallery-container">
+    <div class="container">
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </section>
+  
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why Choose Us</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="feature-title">Secure Downloads</h3>
+          <p class="feature-description">All our content is verified and scanned for your safety and peace of mind.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <h3 class="feature-title">Regular Updates</h3>
+          <p class="feature-description">We constantly update our collection with the latest and most popular content.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="feature-title">Fast Installation</h3>
+          <p class="feature-description">Simple and quick installation process for all our applications and games.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h3 class="feature-title">24/7 Support</h3>
+          <p class="feature-description">Our dedicated team is always available to assist you with any issues.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>ModernGallery</h3>
+          <p>Providing high-quality digital content since 2023.</p>
+          <div class="social-links">
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Browse</a></li>
+            <li><a href="#">Collections</a></li>
+            <li><a href="#">Featured</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="#">Applications</a></li>
+            <li><a href="#">Games</a></li>
+            <li><a href="#">Tools</a></li>
+            <li><a href="#">Productivity</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 ModernGallery. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Sample data
+      const galleryData = [
+        {
+          img: "https://www.nhoy.store/photo/app-ipa.jpg",
+          title: "portal",
+          description: " A virtual reality experience with stunning graphics",
+          category: "apps,entertainment",
+          badge: "Popular",
+          downloads: "115.2K",
+          rating: "8.8",
+          link: "/key/key.html"
+        },
+        {
+          img: "https://www.nhoy.store/photo/ipa.jpg",
+          title: "sign IPA",
+          description: "Professional photo editing with advanced filters",
+          category: "apps,productivity",
+          badge: "Trending",
+          downloads: "87.7K",
+          rating: "7.6",
+          link: "/key/youtube.html"
+        },
+        {
+          img: "https://i.pinimg.com/474x/9b/aa/66/9baa66a3fb33bfcea3e8b791dee5d1c7.jpg",
+          title: "Free fire hack",
+          description: "Ultimate survival game with high-quality graphics",
+          category: "games",
+          badge: "New",
+          downloads: "22.3K",
+          rating: "6.9",
+          link: "/mode/index.html"
+        },
+        {
+          img: "https://i.pinimg.com/474x/63/28/42/632842189195db86f995ce96e4f3a8f9.jpg",
+          title: "8 Ball Pool",
+          description: "Secure browsing with advanced encryption",
+          category: "tools,security",
+          badge: "",
+          downloads: "132.5K",
+          rating: "7.7",
+          link: "#",
+
+        },
+        {
+          img: "/api/placeholder/280/180",
+          title: "Task Manager",
+          description: "Organize your work with smart task management",
+          category: "productivity,apps",
+          badge: "",
+          downloads: "5.8K",
+          rating: "4.5",
+          link: "#",
+          comingSoon: true
+        },
+        {
+          img: "/api/placeholder/280/180",
+          title: "Racing Simulator",
+          description: "Realistic racing experience with multiple tracks",
+          category: "games",
+          badge: "Top Rated",
+          downloads: "18.9K",
+          rating: "4.8",
+          link: "#",
+          comingSoon: true
+        },
+        {
+          img: "/api/placeholder/280/180",
+          title: "File Converter",
+          description: "Convert between multiple file formats easily",
+          category: "tools,productivity",
+          badge: "",
+          downloads: "7.3K",
+          rating: "4.6",
+          link: "#",
+          comingSoon: true
+        },
+        {
+          img: "/api/placeholder/280/180",
+          title: "Weather Forecast",
+          description: "Accurate weather predictions with radar maps",
+          category: "apps",
+          badge: "",
+          downloads: "9.1K",
+          rating: "4.4",
+          link: "#",
+          comingSoon: true
+        }
+      ];
+      
+      const galleryGrid = document.getElementById("galleryGrid");
+      const searchInput = document.getElementById("searchInput");
+      const filterButtons = document.querySelectorAll(".filter-btn");
+      const backToTop = document.getElementById("backToTop");
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const navMenu = document.getElementById("navMenu");
+      
+      let activeCategory = "all";
+      
+      // Mobile menu toggle
+      mobileMenuBtn.addEventListener("click", function() {
+        navMenu.classList.toggle("active");
+      });
+      
+      // Show loading skeletons
+      function showLoadingSkeletons() {
+        galleryGrid.innerHTML = "";
+        
+        for (let i = 0; i < 6; i++) {
+          const skeletonItem = document.createElement("div");
+          skeletonItem.className = "skeleton-item";
+          skeletonItem.innerHTML = `
+            <div class="skeleton-image skeleton"></div>
+            <div class="skeleton-content">
+              <div class="skeleton-title skeleton"></div>
+              <div class="skeleton-text skeleton"></div>
+              <div class="skeleton-text skeleton"></div>
+              <div class="skeleton-tags">
+                <div class="skeleton-tag skeleton"></div>
+                <div class="skeleton-tag skeleton"></div>
+              </div>
+              <div class="skeleton-footer">
+                <div class="skeleton-stats skeleton"></div>
+                <div class="skeleton-button skeleton"></div>
+              </div>
+            </div>
+          `;
+          
+          galleryGrid.appendChild(skeletonItem);
+        }
+      }
+      
+      // Render gallery items
+      function renderGallery(items) {
+        galleryGrid.innerHTML = "";
+        
+        if (items.length === 0) {
+          const noResults = document.createElement("div");
+          noResults.style.gridColumn = "1 / -1";
+          noResults.style.textAlign = "center";
+          noResults.style.padding = "40px 0";
+          noResults.innerHTML = `
+            <i class="fas fa-search" style="font-size: 3rem; color: var(--light-text); margin-bottom: 20px;"></i>
+            <h3 style="margin-bottom: 10px;">No results found</h3>
+            <p style="color: var(--light-text);">Try different search terms or categories</p>
+          `;
+          galleryGrid.appendChild(noResults);
+          return;
+        }
+        
+        items.forEach(item => {
+          const galleryItem = document.createElement("div");
+          galleryItem.className = "gallery-item";
+          
+          // Process tags
+          const tags = item.category ? item.category.split(",").map(tag => 
+            `<span class="tag">${tag.trim()}</span>`
+          ).join("") : "";
+          
+          galleryItem.innerHTML = `
+            <div class="item-image">
+              <img src="${item.img}" alt="${item.title}">
+              ${item.badge ? `<span class="item-badge">${item.badge}</span>` : ""}
+            </div>
+            <div class="item-content">
+              <h3 class="item-title">${item.title}</h3>
+              <p class="item-description">${item.description}</p>
+              <div class="item-tags">
+                ${tags}
+              </div>
+              <div class="item-footer">
+                <div class="item-stats">
+                  <span><i class="fas fa-download"></i> ${item.downloads}</span>
+                  <span><i class="fas fa-star"></i> ${item.rating}</span>
+                </div>
+                <a href="${item.link}" class="${item.comingSoon ? 'soon-btn' : 'download-btn'}">
+                  ${item.comingSoon ? "Coming Soon" : "Download"}
+                </a>
+              </div>
+            </div>
+          `;
+          
+          galleryGrid.appendChild(galleryItem);
+        });
+      }
+      
+      // Filter gallery items
+      function filterGallery() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        return galleryData.filter(item => {
+          // Check search term
+          const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
+                               item.description.toLowerCase().includes(searchTerm);
+          
+          // Check category
+          const matchesCategory = activeCategory === "all" || 
+                                 (item.category && item.category.includes(activeCategory));
+          
+          return matchesSearch && matchesCategory;
+        });
+      }
+      
+      // Initial load with loading animation
+      showLoadingSkeletons();
+      
+      // Simulate loading delay
+      setTimeout(() => {
+        renderGallery(galleryData);
+      }, 800);
+      
+      // Search functionality
+      searchInput.addEventListener("input", () => {
+        showLoadingSkeletons();
+        
+        setTimeout(() => {
+          renderGallery(filterGallery());
+        }, 500);
+      });
+      
+      // Category filtering
+      filterButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          // Update active state
+          filterButtons.forEach(btn => btn.classList.remove("active"));
+          button.classList.add("active");
+          
+          // Update active category
+          activeCategory = button.dataset.category;
+          
+          // Rerender gallery
+          showLoadingSkeletons();
+          
+          setTimeout(() => {
+            renderGallery(filterGallery());
+          }, 500);
+        });
+      });
+      
+      // Back to top button
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add("visible");
+        } else {
+          backToTop.classList.remove("visible");
+        }
+      });
+      
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

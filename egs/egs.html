@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Photo Grid</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="A responsive photo grid showcasing beautiful images with captions.">
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #e3e0e6;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000000;
+    border-bottom: 1px solid #ccc;
+    
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .menu ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .menu li {
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .menu li.active {
+    color: #007BFF;
+    font-weight: bold;
+  }
+  
+  .menu li:hover {
+    color: #555;
+  }
+  
+  /* Photo Grid */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .photo-item {
+    text-align: center;
+    border: 1px solid #000000;
+    padding: 0px;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .photo-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .photo-item img {
+    width: 30%;
+    height: 55%;
+    border-radius: 10%;
+    object-fit: cover;
+    margin-top: 10px;
+  }
+  
+  .photo-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .photo-item button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .photo-item button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .photo-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .photo-item button {
+    width: 30%;
+    background-color: #fcf9f9;
+    color: #000000;
+    border: none;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .photo-item button:hover {
+    background-color: #00ff2a;
+    color: #000000;
+    border: 2px solid #00ff00;
+  }
+  .esign {
+    color: #1900ff;
+  }
+  .gbox {
+    color: #1eff00;
+  }
+  .scarlet {
+    color: #ff0000;
+  }
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.trollstore{
+  color: #007BFF;
+}
+.feather{
+  color: #4400ffaf;
+}
+.youtube{
+  color: #ff0000;
+}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <a href="/index.html">
+        <img src="/photo/logo-removebg-preview.png" alt="">
+      </a>
+        
+    </div>
+    <nav class="menu" aria-label="Main Navigation">
+      <ul>
+
+        <li><a href="/contact.html"><i class="fa-solid fa-bars"></i></a></li>
+      </ul>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="photo-grid">
+      <div class="photo-item">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Beautiful scenery 1">
+        <h3 class="esign">Esign</h3>
+        <a href="/key/key.html">
+          <button> FREE </button>
+      </a>
+      </div>
+      <div class="photo-item">
+        <img src="https://i.pinimg.com/736x/0b/99/d4/0b99d465ec90abaccc50cebbae351b23.jpg" alt="Beautiful scenery 2">
+        <h3 class="gbox">Gbox</h3>
+        <a href="/key/gbox.html">
+          <button>FREE</button>
+      </a>
+      </div>
+      <div class="photo-item">
+        <img src="https://usescarlet.com/icon.png" alt="Beautiful scenery 3">
+        <h3 class="scarlet"> Scarlet </h3>
+        <a href="/key/key1.html">
+            <button>FREE</button>
+        </a>
+      </div>
+      <div class="photo-item">
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRIpYZo5KgnyLIbr1Q7THWqY_dKC9LsKQipvqB4w15AKkFBEj6F" alt="Beautiful scenery 2">
+        <h3 class="trollstore">TrollstoreX</h3>
+        <a href="/key/trollx.html">
+          <button>FREE</button>
+      </a>
+      </div>
+      <div class="photo-item">
+        <img src="https://feather-ios.com/assets/logo-squire.webp" alt="Beautiful scenery 3">
+        <h3 class="feather"> Feather </h3>
+        <button onclick="buyItem('Beautiful Scenery 3')">SOOM</button>
+      </div>
+      <div class="photo-item">
+        <img src="https://i.pinimg.com/236x/06/19/60/06196084992e762df628b46900195d4f.jpg" alt="Beautiful scenery 3">
+        <h3 class="youtube"> youtube Premium</h3>
+        <a href="/key/youtube.html">
+        <button>FREE</button>
+        </a>
+        
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 BUY MHOY.STORE</p>
+  </footer>
+
+  
+</body>
+</html>
