@@ -1,794 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nhoy | Web Developer</title>
-  <link rel="icon" href="/photo/logo11.jpg" sizes="32x32" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <style>
-    /* Base styles and variables - New Color Palette */
-    :root {
-      --primary: #2563eb;
-      --secondary: #1e40af;
-      --accent: #f43f5e;
-      --light: #f1f5f9;
-      --dark: #0f172a;
-      --gray: #64748b;
-      --text: #1e293b;
-      --background: #f8fafc;
-      --card-bg: #ffffff;
-      --border-radius: 16px;
-      --card-radius: 20px;
-      --box-shadow: 0 10px 25px rgb(203, 198, 198);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      --gradient: linear-gradient(135deg, #2563eb, #4f46e5);
-      --accent-gradient: linear-gradient(135deg, #f43f5e, #ec4899);
-    }
-
-    /* Dark mode variables */
-    .dark-mode {
-      --text: #f1f5f9;
-      --background: #000000;
-      --card-bg: #1e293b;
-      --gray: #94a3b8;
-      --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Reset and base styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background-color: var(--background);
-      color: var(--text);
-      line-height: 1.7;
-      transition: var(--transition);
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--primary);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* Layout */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .section {
-      padding: 6rem 0;
-      position: relative;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 4rem;
-      position: relative;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
-      margin-bottom: 0.75rem;
-      display: inline-block;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-title h2::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: -10px;
-      width: calc(100% + 20px);
-      height: 12px;
-      background: var(--accent);
-      opacity: 0.3;
-      z-index: -1;
-      transform: skewX(-10deg);
-    }
-
-    /* Header section - Modern Hero */
-    .header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 0 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: var(--accent-gradient);
-      opacity: 0.05;
-      z-index: 0;
-    }
-
-    .header::after {
-      content: '';
-      position: absolute;
-      bottom: -100px;
-      left: -100px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: var(--gradient);
-      opacity: 0.05;
-      z-index: 0;
-    }
-
-    .profile {
-      margin-bottom: 2.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .profile-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 6px solid var(--card-bg);
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-    }
-
-    .profile-img:hover {
-      transform: scale(1.05) rotate(5deg);
-      box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-content h1 {
-      font-size: 4rem;
-      margin-bottom: 0.75rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -1px;
-    }
-
-    .header-content h2 {
-      font-size: 1.75rem;
-      color: var(--accent);
-      margin-bottom: 1.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .header-text {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      font-size: 1.25rem;
-      color: var(--gray);
-      line-height: 1.8;
-    }
-
-    /* Social links - Floating style */
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.75rem;
-      margin-top: 2.5rem;
-    }
-
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background-color: var(--card-bg);
-      color: var(--primary);
-      font-size: 1.4rem;
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .social-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient);
-      z-index: -1;
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .social-link:hover {
-      transform: translateY(-8px);
-      color: #fff;
-    }
-
-    .social-link:hover::before {
-      opacity: 1;
-    }
-
-    /* Skills section - Card Grid */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 2.5rem;
-      margin-top: 2rem;
-    }
-
-    .skill-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .skill-item:hover {
-      transform: translateY(-10px);
-    }
-
-    .skill-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 90px;
-      height: 90px;
-      border-radius: var(--card-radius);
-      background: var(--card-bg);
-      margin-bottom: 1.25rem;
-      font-size: 2.5rem;
-      color: var(--primary);
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .skill-icon::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient);
-      z-index: -1;
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .skill-item:hover .skill-icon {
-      color: #fff;
-    }
-
-    .skill-item:hover .skill-icon::before {
-      opacity: 1;
-    }
-
-    .skill-name {
-      font-weight: 600;
-      font-size: 1rem;
-      color: var(--text);
-    }
-
-    /* Projects section - Modern Cards */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 3rem;
-    }
-
-    .project-card {
-      background: var(--card-bg);
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .project-card:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    .project-img {
-      height: 220px;
-      width: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .project-card:hover .project-img {
-      transform: scale(1.05);
-    }
-
-    .project-content {
-      padding: 2rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .project-title {
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
-      color: var(--text);
-      transition: var(--transition);
-    }
-
-    .project-card:hover .project-title {
-      color: var(--primary);
-    }
-
-    .project-link {
-      margin-top: auto;
-      align-self: flex-start;
-      padding: 0.75rem 1.5rem;
-      border-radius: 30px;
-      background: var(--gradient);
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: var(--transition);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    }
-
-    .project-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
-    }
-
-    /* Languages section - Pill style */
-    .languages-list {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      list-style: none;
-      margin-top: 2rem;
-    }
-
-    .language-item {
-      padding: 1rem 2rem;
-      background: var(--card-bg);
-      border-radius: 30px;
-      font-weight: 600;
-      box-shadow: var(--box-shadow);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .language-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient);
-      z-index: -1;
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .language-item:hover {
-      transform: translateY(-8px);
-      color: white;
-    }
-
-    .language-item:hover::before {
-      opacity: 1;
-    }
-
-    /* Theme toggle - Floating */
-    .theme-toggle {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 2.5rem;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--gradient);
-      color: white;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      font-size: 1.5rem;
-      z-index: 999;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      transition: var(--transition);
-    }
-
-    .theme-toggle:hover {
-      transform: rotate(45deg) scale(1.1);
-    }
-
-    /* Decorative elements */
-    .decorative-shape {
-      position: absolute;
-      opacity: 0.05;
-      z-index: 0;
-    }
-
-    .skills-shape {
-      top: 50px;
-      left: -100px;
-      width: 250px;
-      height: 250px;
-      border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
-      background: var(--accent-gradient);
-      animation: morphShape 15s linear infinite alternate;
-    }
-
-    .projects-shape {
-      bottom: 100px;
-      right: -100px;
-      width: 300px;
-      height: 300px;
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      background: var(--gradient);
-      animation: morphShape 18s linear infinite alternate;
-    }
-
-    @keyframes morphShape {
-      0% {
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      }
-      50% {
-        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-      }
-      100% {
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      }
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate {
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .section {
-        padding: 5rem 0;
-      }
-
-      .header {
-        padding: 5rem 0 3rem;
-      }
-
-      .header-content h1 {
-        font-size: 3rem;
-      }
-
-      .header-content h2 {
-        font-size: 1.5rem;
-      }
-
-      .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      }
-
-      .languages-list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .header-content h1 {
-        font-size: 2.5rem;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-
-      .profile-img {
-        width: 160px;
-        height: 160px;
-      }
-
-      .theme-toggle {
-        bottom: 2rem;
-        right: 2rem;
-        width: 50px;
-        height: 50px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="nhoy official website">
+    <meta name="keywords" content="nhoy, official, website, esign, free, download, keyfree, scib, trollstore">
+    <meta name="author" content="nhoy official">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="index, follow">
+    
+    <title>nhoy official</title>
+
+    <link rel="icon" href="https://www.nhoy.store/photo/logo11.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-  <div class="container">
-    <header class="header">
-      <div class="profile">
-        <img src="/photo/logo11.jpg" alt="Nhoy's Profile" class="profile-img">
-      </div>
-      <div class="header-content">
-        <h1>Nhoy</h1>
-        <h2>Web Developer</h2>
-        <p class="header-text">
-          I'm passionate about technology, cyber security, and web development.
-          I enjoy coding, solving problems, and staying up-to-date with the latest trends.
-        </p>
-      </div>
-      <div class="social-links">
-        <a href="https://www.tiktok.com/@nhoy_n?_t=ZS-8tBmMfw9ZiS&_r=1" class="social-link" aria-label="TikTok">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <a href="https://www.facebook.com/share/164UR4BokF/?mibextid=wwXIfr" class="social-link" aria-label="Facebook">
-          <i class="fa-brands fa-facebook"></i>
-        </a>
-        <a href="https://www.youtube.com/@Xai-qq" class="social-link" aria-label="YouTube">
-          <i class="fa-brands fa-youtube"></i>
-        </a>
-        <a href="https://nhoy_11.t.me/" class="social-link" aria-label="Telegram">
-          <i class="fa-brands fa-telegram"></i>
-        </a>
-      </div>
-    </header>
+    <div class="header">
+        <div class="box-logo">
+            <div class="logo">
+                <img src="https://i.pinimg.com/1200x/14/a1/71/14a171de882e567cc020668c691eba2d.jpg" alt="logo">
+            </div>
+            <div class="user-info" style="margin-left: 5px;">
+            </div>
+        </div>
+        <div class="notification">
+            
+                <i class="fa-solid fa-bars fa-lg" style="color: #ffffff;"></i>
+            </a>
+        </div>
+    </div>
 
-    <section class="section" id="skills">
-      <div class="decorative-shape skills-shape"></div>
-      <div class="section-title">
-        <h2>Skills</h2>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-html5"></i>
-          </div>
-          <p class="skill-name">HTML</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-css3-alt"></i>
-          </div>
-          <p class="skill-name">CSS</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-js"></i>
-          </div>
-          <p class="skill-name">JavaScript</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-python"></i>
-          </div>
-          <p class="skill-name">Python</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-linux"></i>
-          </div>
-          <p class="skill-name">Linux</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-git"></i>
-          </div>
-          <p class="skill-name">Git</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-docker"></i>
-          </div>
-          <p class="skill-name">Docker</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-node-js"></i>
-          </div>
-          <p class="skill-name">Node.js</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-react"></i>
-          </div>
-          <p class="skill-name">React</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-keycdn"></i>
-          </div>
-          <p class="skill-name">Pen Testing</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-wpexplorer"></i>
-          </div>
-          <p class="skill-name">WPE</p>
-        </div>
-        <div class="skill-item">
-          <div class="skill-icon">
-            <i class="fa-brands fa-figma"></i>
-          </div>
-          <p class="skill-name">Figma</p>
-        </div>
-      </div>
-    </section>
-    <section class="section" id="projects">
-      <div class="decorative-shape projects-shape"></div>
-      <div class="section-title">
-        <h2>Projects</h2>
-      </div>
-      <div class="projects-grid">
-        <div class="project-card">
-          <img src="/photo/esign.jpg" alt="APP Esing Project" class="project-img">
-          <div class="project-content">
-            <h3 class="project-title">APP Esing</h3>
-            <a href="/file-game/new.html" class="project-link">View Project</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://i.pinimg.com/736x/5c/47/2e/5c472e512da8d3d346da67d02c296f47.jpg" alt="Esing FREE Project" class="project-img">
-          <div class="project-content">
-            <h3 class="project-title">Esing FREE</h3>
-            <a href="/esign-free/new.html" class="project-link">View Project</a>
-          </div>
-        </div>
-        <div class="project-card">
-          <img src="https://i.pinimg.com/736x/67/c7/41/67c74161d4e07b2c2d862a6e213cb9e1.jpg" alt="Troll Store Project" class="project-img">
-          <div class="project-content">
-            <h3 class="project-title">Troll Store</h3>
-            <a href="/trollstore/index.html" class="project-link">View Project</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
 
-    <section class="section" id="languages">
-      <div class="section-title">
-        <h2>Languages</h2>
-      </div>
-      <ul class="languages-list">
-        <li class="language-item">Khmer (Native)</li>
-        <li class="language-item">English (Intermediate)</li>
-      </ul>
-    </section>
-  </div>
+        <!-- First Banner -->
+        <div class="banner first-banner">
+            <div class="banner-container">
+                <div class="banner-slide"><img src="https://i.pinimg.com/1200x/6d/5e/6d/6d5e6d4088a17515eb8287c61399168e.jpg" alt="Promotion Banner 1"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/40/ea/cb/40eacbbeffa90265c067db283c7cb058.jpg" alt="Promotion Banner 2"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/37/d9/2b/37d92b1e45c858409cdff8e0b1289d68.jpg" alt="Promotion Banner 3"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/72/33/d1/7233d13464b00d7bce502e4e2bfa502e.jpg" alt="Promotion Banner 4"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/ed/cb/4c/edcb4cc7bdadbfb76a8e4ff364d5eb9f.jpg" alt="Promotion Banner 5"></div>
+            </div>
+            <div class="banner-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="banner-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="dots-container"></div>
+        </div>
 
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-moon"></i>
-  </button>
+        <div class="section-title">
+            <span>ESIGN</span>
+            <a href="#" class="khmer-text">ច្រើនទៀត</a>
+        </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Apply animations to sections
-      const sections = document.querySelectorAll('.section');
-      sections.forEach((section, index) => {
-        section.classList.add('animate');
-        section.style.animationDelay = `${index * 0.3}s`;
-      });
+        <!-- ESIGN Grid -->
+        <div class="esign-grid">
+            <div class="box-esign new-item">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Pro</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/SYKaO8" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Plus</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/q26Etj" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Standard</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/6BFC8C" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Basic</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/y8PvzI" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Free</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/XYymqT" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Free</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/1QbTEI" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Free</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/qIELXJ" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+        </div>
 
-      // Dark mode toggle
-      const themeToggle = document.getElementById('theme-toggle');
-      const themeIcon = themeToggle.querySelector('i');
-      
-      // Check for saved theme preference
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-      }
-      
-      themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
+        <div class="section-title">
+            <span>Roblox hack</span>
+            <a href="#" class="khmer-text">ច្រើនទៀត</a>
+        </div>
         
-        if (document.body.classList.contains('dark-mode')) {
-          themeIcon.classList.remove('fa-moon');
-          themeIcon.classList.add('fa-sun');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          themeIcon.classList.remove('fa-sun');
-          themeIcon.classList.add('fa-moon');
-          localStorage.setItem('theme', 'light');
-        }
-      });
-      
-      // Animate elements when they come into view
-      const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-      };
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            if (entry.target.classList.contains('skill-item')) {
-              entry.target.style.opacity = 1;
-              entry.target.style.transform = 'translateY(0)';
-            }
-            if (entry.target.classList.contains('project-card')) {
-              entry.target.style.opacity = 1;
-              entry.target.style.transform = 'translateY(0)';
-            }
-          }
-        });
-      }, observerOptions);
-      
-      // Observe skill items
-      const skillItems = document.querySelectorAll('.skill-item');
-      skillItems.forEach((item, index) => {
-        item.style.opacity = 0;
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        item.style.transitionDelay = `${index * 0.08}s`;
-        observer.observe(item);
-      });
-      
-      // Observe project cards
-      const projectCards = document.querySelectorAll('.project-card');
-      projectCards.forEach((card, index) => {
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(40px)';
-        card.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-        card.style.transitionDelay = `${index * 0.15}s`;
-        observer.observe(card);
-      });
-    });
-  </script>
-</body>
+        <div class="esign-grid">
+            <div class="box-esign new-item">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://deltaios-executor.com/Icon.jpg" alt="Roblox Icon"></div>
+                    <div class="home-esign">
+                        <h1>Roblox</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href=" " target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://deltaios-executor.com/Icon.jpg" alt="Roblox Icon"></div>
+                    <div class="home-esign">
+                        <h1>Roblox Android</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://deltaios.org/delta.apk" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://krnl-ios.com/unnamed.png" alt="Key Icon"></div>
+                    <div class="home-esign">
+                        <h1> Krnl </h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://krnl-ios.com/#popup1" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://krnl-ios.com/unnamed.png" alt="Script Icon"></div>
+                    <div class="home-esign">
+                        <h1>Krnl Android </h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://krnl.webfiles.pro/android.html" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-title">
+            <span>Troll store</span>
+            <a href="#" class="khmer-text">ច្រើនទៀត</a>
+        </div>
+        <!-- Data Plan Grid -->
+        <div class="data-plan-grid">
+            <div class="card new-item">
+                <div class="card-scib-container">
+                    <div class="card-scib"><img src="https://i.pinimg.com/474x/1c/d7/04/1cd7044b82d9ef32d1830008a262e747.jpg" alt="Troll Store Icon"></div>
+                    <div class="card-trollstore"><h2>Trollstore Premium</h2><p class="khmer-text"></p></div>
+                </div>
+                <div class="data-usage">
+                    <span class="khmer-text"></span>
+                    <span><a href="/troll.html"><i class="fa-solid fa-download fa-2xl" style="color: var(--accent-color);"></i></a></span>
+                </div>
+            </div>
+            <div class="card">
+               <div class="card-scib-container">
+                    <div class="card-scib"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Certificate Icon"></div>
+                    <div class="card-trollstore"><h2>Certificate Eign</h2><p class="khmer-text"></p></div>
+                </div>
+                 <div class="data-usage">
+                    <span class="khmer-text"></span>
+                    <span><a href="https://t.me/nhoy200/229"><i class="fa-solid fa-download fa-2xl" style="color: var(--accent-color);"></i></a></span>
+                </div>
+            </div>
+        </div>
 
+        <!-- Spacer -->
+        <div style="height: 80px;"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navigation">
+        <a href="https://nhoy_11.t.me" class="nav-item active">
+            <div class="nav-icon telegram-icon"><i class="fa-brands fa-telegram"></i></div>
+            <span class="khmer-text">telegram</span>
+        </a>
+        <a href="https://web.facebook.com/jkj.nha.2025/?rdid=0wBfBtdXtoKp2bqC" class="nav-item">
+            <div class="nav-icon facebook-icon"><i class="fa-brands fa-facebook"></i></div>
+            <span class="khmer-text">facebook</span>
+        </a>
+        <a href="https://youtube.com/@xai-qq?si=uPsNoogH7OaNU__O" class="nav-item">
+            <div class="nav-icon youtube-icon"><i class="fa-brands fa-youtube"></i></div>
+            <span>youtube</span>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon instagram-icon"><i class="fa-brands fa-instagram"></i></div>
+            <span class="khmer-text">instagram</span>
+        </a>
+    </div>
+
+    <!-- START: HTML FOR NEW GUIDED UNLOCK MODAL -->
+    <div id="guidedLockerModal" class="gl-modal-overlay" style="display: none;">
+        <div class="gl-modal-content">
+
+            <!-- Header -->
+            <div class="gl-header">
+                <h2>Unlock Download</h2>
+                <p>Complete the steps below to continue</p>
+                <button class="gl-close-btn" aria-label="Close">&times;</button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="gl-progress-bar">
+                <div class="gl-progress-step active" data-step="1">
+                    <div class="gl-step-circle">1</div>
+                    <span>Subscribe</span>
+                </div>
+                <div class="gl-progress-line"></div>
+                <div class="gl-progress-step" data-step="2">
+                    <div class="gl-step-circle">2</div>
+                    <span>Join</span>
+                </div>
+                <div class="gl-progress-line"></div>
+                <div class="gl-progress-step" data-step="3">
+                    <div class="gl-step-circle"><i class="fa-solid fa-check"></i></div>
+                    <span>Unlock</span>
+                </div>
+            </div>
+
+            <!-- Action Steps -->
+            <div class="gl-actions-container">
+                <!-- Step 1: YouTube -->
+                <div class="gl-action-step active" data-step="1">
+                    <i class="fab fa-youtube gl-action-icon youtube"></i>
+                    <h3>Subscribe on YouTube</h3>
+                    <p>Subscribe to our channel to support our work.</p>
+                    <a href="https://www.youtube.com/@xai-qq?si=uPsNoogH7OaNU__O" target="_blank" class="gl-action-button youtube" id="youtubeActionBtn">
+                        <i class="fab fa-youtube"></i>
+                        <span>Subscribe</span>
+                    </a>
+                </div>
+
+                <!-- Step 2: Telegram -->
+                <div class="gl-action-step" data-step="2">
+                    <i class="fab fa-telegram gl-action-icon telegram"></i>
+                    <h3>Join on Telegram</h3>
+                    <p>Join our Telegram for the latest updates.</p>
+                    <a href="https://nhoy_11.t.me" target="_blank" class="gl-action-button telegram" id="telegramActionBtn">
+                        <i class="fab fa-telegram"></i>
+                        <span>Join Channel</span>
+                    </a>
+                </div>
+
+                <!-- Step 3: Unlocked -->
+                <div class="gl-action-step" data-step="3">
+                    <i class="fa-solid fa-lock-open gl-action-icon unlocked"></i>
+                    <h3>Content Unlocked!</h3>
+                    <p>Thanks for your support! Your download is ready.</p>
+                    <button class="gl-action-button unlocked" id="unlockActionBtn">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Proceed to Download</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="/js/main.js"></script>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- ==== SCRIPT: INITIALIZE SCROLL ANIMATIONS ==== -->
+    <script>
+        // Initialize ScrollReveal with some default settings
+        const sr = ScrollReveal({
+            distance: '50px', // How far the element moves
+            duration: 1500,   // Animation duration in ms
+            easing: 'ease-in-out', // Animation easing
+            reset: false       // Animations do not repeat on scroll up
+        });
+
+        // Reveal the main banner and section titles from the top
+        sr.reveal('.first-banner, .section-title', {
+            origin: 'top',
+            interval: 200 // Stagger delay between elements
+        });
+
+        // Reveal all cards in both grids from the bottom with a stagger effect
+        sr.reveal('.esign-grid .box-esign, .data-plan-grid .card', {
+            origin: 'bottom',
+            interval: 150 // Stagger delay between each card
+        });
+
+        // Reveal the second banner from the bottom
+         sr.reveal('.second-banner', {
+            origin: 'bottom'
+        });
+    </script>
+
+</body>
 </html>
